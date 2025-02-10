@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N-able EDR powered by SentinelOne</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: white;
+            color: #241C3A;
+            line-height: 1.5;
+        }
+
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        @media (min-width: 640px) {
+            .container { max-width: 540px; }
+        }
+        @media (min-width: 768px) {
+            .container { max-width: 720px; }
+        }
+        @media (min-width: 1024px) {
+            .container { max-width: 960px; }
+        }
+        @media (min-width: 1280px) {
+            .container { max-width: 1140px; }
+        }
+        @media (min-width: 1536px) {
+            .container { max-width: 1320px; }
+        }
+
+        /* Header */
+        header {
+            background-color: #1E1433;
+            padding: 1.5rem 0;
+        }
+
+        header .container {
+            display: flex;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            header .container,
+            footer .container {
+                padding: 0;
+            }
+        }
+
+        header img {
+            height: 2rem;
+            width: auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            background-color: #1E1433;
+            padding: 2rem;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('./assets/background_landing.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.9;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            padding: 3rem 0;
+        }
+
+        .hero-text {
+            max-width: 600px;
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .hero {
+                padding: 3rem 2rem;
+            }
+            .hero-content {
+                padding: 4rem 0;
+            }
+            .hero-text {
+                padding: 0;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hero {
+                padding: 4rem 2rem;
+            }
+            .hero-content {
+                padding: 5rem 0;
+            }
+        }
+
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Text */
+        h1 {
+            font-size: 44px;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #8C58ED;
+            margin-bottom: 2rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #241C3A;
+            margin-bottom: 2rem;
+        }
+
+        /* Form Card */
+        .form-card {
+            background: white;
+            border-radius: 0.375rem;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        /* Inputs and Select */
+        input, textarea, select {
+            width: 100%;
+            padding: 0.75rem 0;
+            margin-bottom: 1.25rem;
+            border: none;
+            border-bottom: 1px solid #575757;
+            background: white;
+            font-family: 'Manrope', sans-serif;
+            outline: none;
+            color: #241C3A;
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23575757' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right center;
+            padding-right: 1.5rem;
+        }
+
+        select::-ms-expand {
+            display: none;
+        }
+
+        option {
+            color: #241C3A;
+        }
+
+        textarea {
+            min-height: 40px;
+            resize: none;
+        }
+
+        .form-grid {
+            display: grid;
+            gap: 1.25rem;
+        }
+
+        @media (min-width: 768px) {
+            .form-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Button */
+        button {
+            background: #2BCFF3;
+            color: #241C3A;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background: rgba(43, 207, 243, 0.9);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+        }
+
+        .features h2 {
+            font-size: 1.875rem;
+            color: #312542;
+            margin-bottom: 4rem;
+        }
+
+        .feature-cards {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .features .grid {
+            display: grid;
+            gap: 3rem;
+        }
+
+        .features-image {
+            position: relative;
+            margin-top: 2rem;
+        }
+
+        .features-image::before {
+            content: '';
+            position: absolute;
+            top: -1rem;
+            right: -1rem;
+            width: 6rem;
+            height: 6rem;
+            background: #6B21DF;
+            transform: rotate(-10deg);
+            z-index: 1;
+        }
+
+        .features-image img {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        @media (min-width: 768px) {
+            .feature-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .features .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .features .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1rem;
+        }
+
+        .feature-card img {
+            width: 3rem;
+            height: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+        }
+
+        .about h2 {
+            font-size: 2.25rem;
+            color: #312542;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1E1433;
+            padding: 1.5rem 0;
+        }
+
+        footer img {
+            height: 2rem;
+            width: auto;
+        }
+
+        /* Add these styles to your existing CSS */
+        input.invalid,
+        select.invalid,
+        textarea.invalid {
+            border-bottom-color: #ef4444;
+        }
+
+        button[type="submit"]:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        .message-fade-out {
+            animation: fadeOut 0.5s ease-out forwards;
+        }
+    </style>
+    <script>
+        // Form submission handler
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            const submitButton = form.querySelector('button[type="submit"]');
+
+            // Success and error message containers
+            const messageContainer = document.createElement('div');
+            messageContainer.style.marginTop = '1rem';
+            messageContainer.style.padding = '1rem';
+            messageContainer.style.borderRadius = '0.375rem';
+            messageContainer.style.display = 'none';
+            form.appendChild(messageContainer);
+
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Disable submit button and show loading state
+                submitButton.disabled = true;
+                submitButton.innerHTML = 'Sending...';
+
+                // Collect form data
+                const formData = {
+                    firstName: form.querySelector('input[placeholder="First Name*"]').value,
+                    lastName: form.querySelector('input[placeholder="Last Name*"]').value,
+                    email: form.querySelector('input[type="email"]').value,
+                    phone: form.querySelector('input[type="tel"]').value,
+                    company: form.querySelector('input[placeholder="Company Name*"]').value,
+                    country: form.querySelector('select[name="country"]').value,
+                    jobTitle: form.querySelector('input[placeholder="Job Title*"]').value,
+                    comments: form.querySelector('textarea').value
+                };
+
+                try {
+                    // Replace with your actual endpoint
+                    const response = await fetch('YOUR_API_ENDPOINT', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+
+                    // Show success message
+                    messageContainer.style.display = 'block';
+                    messageContainer.style.backgroundColor = '#4ade80';
+                    messageContainer.style.color = '#fff';
+                    messageContainer.innerHTML = 'Thank you! The whitepaper will be sent to your email shortly.';
+                    
+                    // Reset form
+                    form.reset();
+
+                } catch (error) {
+                    // Show error message
+                    messageContainer.style.display = 'block';
+                    messageContainer.style.backgroundColor = '#ef4444';
+                    messageContainer.style.color = '#fff';
+                    messageContainer.innerHTML = 'An error occurred. Please try again later.';
+                    
+                    console.error('Error:', error);
+                } finally {
+                    // Re-enable submit button
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = 'Download Now';
+
+                    // Hide message after 5 seconds
+                    setTimeout(() => {
+                        messageContainer.style.display = 'none';
+                    }, 5000);
+                }
+            });
+
+            // Form validation
+            const requiredInputs = form.querySelectorAll('[required]');
+            requiredInputs.forEach(input => {
+                input.addEventListener('invalid', function(e) {
+                    e.preventDefault();
+                    this.classList.add('invalid');
+                });
+
+                input.addEventListener('input', function() {
+                    if (this.validity.valid) {
+                        this.classList.remove('invalid');
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <img src="./assets/logo.svg" alt="N-able and Licencias OnLine logos">
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="container hero-content">
+            <div class="grid">
+                <div class="hero-text">
+                    <h1>
+                        Boost your Security with<br>N-able EDR 
+                        powered by SentinelOne<sup>®</sup>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Discover how artificial intelligence and automation can protect your business in real time
+                    </p>
+                    <div>
+                        <p>
+                            Cybersecurity is a priority for technology companies, and protecting your digital assets has never been more crucial. <strong>With N-able EDR by SentinelOne<sup>®</sup>,</strong> you can detect, mitigate and respond to cyber threats like ransomware in seconds.
+                        </p>
+                        <br>
+                        <p>
+                            Download this whitepaper that explains how this AI-backed solution can ensure your business continuity and simplify security management.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-card">
+                    <p>
+                        Register now to download the exclusive PDF and receive personalized advice from the OnLine Licensing and N-able team
+                    </p>
+                    <form novalidate>
+                        <div class="form-grid">
+                            <input type="text" placeholder="First Name*" required>
+                            <input type="text" placeholder="Last Name*" required>
+                        </div>
+                        <input type="email" placeholder="Email*" required>
+                        <input type="tel" placeholder="Phone Number">
+                        <input type="text" placeholder="Company Name*" required>
+                        <select name="country" required>
+                            <option value="" disabled selected>Country*</option>
+                            <option value="AR">Argentina</option>
+                            <option value="BO">Bolivia</option>
+                            <option value="BR">Brazil</option>
+                            <option value="CL">Chile</option>
+                            <option value="CO">Colombia</option>
+                            <option value="CR">Costa Rica</option>
+                            <option value="CU">Cuba</option>
+                            <option value="DO">Dominican Republic</option>
+                            <option value="EC">Ecuador</option>
+                            <option value="SV">El Salvador</option>
+                            <option value="GT">Guatemala</option>
+                            <option value="HN">Honduras</option>
+                            <option value="MX">Mexico</option>
+                            <option value="NI">Nicaragua</option>
+                            <option value="PA">Panama</option>
+                            <option value="PY">Paraguay</option>
+                            <option value="PE">Peru</option>
+                            <option value="PR">Puerto Rico</option>
+                            <option value="UY">Uruguay</option>
+                            <option value="VE">Venezuela</option>
+                        </select>
+                        <input type="text" placeholder="Job Title*" required>
+                        <textarea placeholder="Questions / Comments"></textarea>
+                        <button type="submit">Download Now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>Besides</h2>
+            <div class="grid">
+                <div class="feature-cards">
+                    <div class="feature-card">
+                        <img src="./assets/icon1.png" alt="Icon 1">
+                        <p><strong>Learn why 42% of the most frequent cyberattacks</strong> are related to ransomware and how to deal with them.</p>
+                    </div>
+                    <div class="feature-card">
+                        <img src="./assets/icon2.png" alt="Icon 2">
+                        <p>Learn how rollback <strong>protects your endpoints from malicious attacks.</strong></p>
+                    </div>
+                    <div class="feature-card">
+                        <img src="./assets/icon3.png" alt="Icon 3">
+                        <p><strong>Learn how to implement security policies</strong> in minutes with a fully integrated, easy-to-use solution.</p>
+                    </div>
+                    <div class="feature-card">
+                        <img src="./assets/icon4.png" alt="Icon 4">
+                        <p><strong>Understand the tangible benefits</strong> that make <strong>N-able EDR by SentinelOne®</strong> a must-have for your business.</p>
+                    </div>
+                </div>
+                <div class="features-image">
+                    <img src="./assets/img_ademas.png" alt="SentinelOne Dashboard">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <div class="grid">
+                <div style="position: relative;">
+                    <div style="position: absolute; top: -1rem; left: -1rem; width: 6rem; height: 6rem; background: #6B21DF; transform: rotate(-10deg);"></div>
+                    <div style="position: absolute; bottom: -1rem; right: -1rem; width: 4rem; height: 4rem; background: #6B21DF; transform: rotate(-10deg);"></div>
+                    <img src="./assets/sobre_licencias.png" alt="Professional working" style="position: relative; z-index: 1; width: 100%; height: auto; border-radius: 0.5rem;">
+                </div>
+                <div>
+                    <h2>About Licencias OnLine and N-able</h2>
+                    <p>
+                        <strong>Licencias OnLine and N-able</strong> are leaders in the distribution and provision of advanced technological solutions for companies in Latin America. Together, they bring to market the powerful <strong>N-able EDR by SentinelOne<sup>®</sup></strong>, designed to maximize your business's protection from the most complex cyber threats.
+                    </p>
+                    <div style="margin-top: 2rem;">
+                        <h4 style="font-size: 1rem;">Do you have questions or want more information?</h4>
+                        <p>
+                            Contact our team for personalized advice and discover how to protect your digital assets with market-leading technology.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <img src="./assets/logo.svg" alt="N-able and Licencias OnLine logos">
+        </div>
+    </footer>
+</body>
+</html> 
